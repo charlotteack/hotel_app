@@ -1,10 +1,19 @@
 <template>
   <transition name="slide">
-    <div class="login">
+    <div class="login" :style="{'background-image':bgImg}">
       <h1>登陆</h1>
       <van-cell-group class="login-from">
         <van-field v-model="username" clearable border label="邮箱" placeholder="请输入邮箱" :error-message="usernameErr" />
         <van-field v-model="password" clearable border type="password" label="密码" placeholder="请输入密码" :error-message="passwordErr" />
+
+        <div>
+          <van-row type="flex" justify="end">
+            <van-col span="6">
+              <a href="javascript:void(0)" @click="forgetPwd" class="forgetA">忘记密码</a>
+            </van-col>
+          </van-row>
+        </div>
+
         <van-cell>
           <van-row>
             <van-col span="12" class="btn">
@@ -22,7 +31,7 @@
 
 <script>
 import MD5 from 'crypto-js/md5';
-import { emailCheck, pwdCheck } from '@/common/util';
+import { emailCheck, pwdCheck, aesEncrypt } from '@/common/util';
 import { tryLogin } from '@/network/login';
 import { Toast,Button as VanButton,Cell as VanCell,CellGroup as VanCellGroup,Col as VanCol,Row as VanRow,Field as VanField} from 'vant';
 
@@ -38,13 +47,21 @@ export default {
   },
   data() {
     return {
-      username: 'test@qq.com',
-      password: 'pwx980101',
+      username: '',
+      password: '',
       usernameErr: '',
       passwordErr: '',
       loading: false,
       redirect: this.$route.query.redirect
     };
+  },
+  props: {
+
+    bgImg: {
+      type: String,
+      default: 'url('+require('@/assets/image/login/login_background.jpeg')+")"
+    }
+
   },
   mounted() {
     if (this.redirect) {
@@ -69,11 +86,11 @@ export default {
         this.loading = false;
         return;
       }
-      tryLogin({ username: this.username, password: MD5(this.password).toString() })
+      tryLogin({ username: this.username, password: aesEncrypt(this.password, 'timelyHotelLogin') })
         .then(res => {
           if (res.status === 200) {
             this.loading = false;
-            this.$router.push('/');
+            this.$router.push('/home');
           } else {
             this.loading = false;
             Toast.fail(res.msg);
@@ -83,6 +100,9 @@ export default {
           Toast.fail(error);
           this.loading = false;
         });
+    },
+    forgetPwd() {
+      this.$router.push('/forget');
     },
     reg() {
       this.$router.push('/reg');
@@ -94,9 +114,9 @@ export default {
 <style scoped>
 .login{
   width: 100%;
-  height: calc(100% - 49px - 44px);
+  /* height: calc(100% - 49px - 44px); */
+  height: 100%;
   text-align: center;
-  /* background: url('@/assets/image/login/login_background.jpeg'); */
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden
@@ -118,7 +138,7 @@ export default {
   
 .login-from .btn{
   text-align: center;
-  margin-top: 10px
+  /* margin-top: 10px */
 }
     
 
@@ -130,6 +150,11 @@ export default {
 .slide-enter, .slide-leave-to{
   opacity: 0;
   transform: translate3d(100%, 0, 0)
+}
+
+.forgetA{
+  font-size: 12px;
+  color: #ccc;
 }
  
 </style>

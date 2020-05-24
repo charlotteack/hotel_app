@@ -21,6 +21,13 @@ export function sendEmail(params) {
   })
 }
 
+export function tryReg(params) {
+  return require({
+    url: '',
+    params: params
+  })
+}
+
 export function quit(params) {
   return require({
     url: '',
