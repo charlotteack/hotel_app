@@ -29,6 +29,9 @@ import { Icon as VanIcon} from 'vant';
 import { Cell as VanCell} from 'vant';
 import HotelList from '@/components/content/hotels/HotelList'
 
+import {getCityHotels} from 'network/home'
+import {getRooms} from 'network/room'
+
 export default {
   components: {
     DetailNavBar,
@@ -56,6 +59,18 @@ export default {
         {img: 'https://img.yzcdn.cn/vant/ipad.jpeg',price: 100, desc:'这里是描述', hotelName:'酒店名'},
         {img: 'https://img.yzcdn.cn/vant/ipad.jpeg',price: 100, desc:'这里是描述', hotelName:'酒店名'}
       ]
+    }
+  },
+  methods: {
+    getRoomList() {
+      getRooms().then(res => {
+        this.roomList = res.data
+      })
+    },
+    getHotelList() {
+      getCityHotels().then(res => {
+        this.hotelList = res.data
+      })
     }
   }
 }

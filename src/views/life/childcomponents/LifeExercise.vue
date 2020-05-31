@@ -81,6 +81,8 @@ import {Button as VanButton} from 'vant'
 import { Picker as VanPicker} from 'vant';
 import { DatetimePicker as VanDatetimePicker} from 'vant';
 import { Popup as VanPopup} from 'vant';
+
+import {getGymInfo} from 'network/life'
 export default {
   components: {
     VanIcon,
@@ -101,22 +103,33 @@ export default {
       showStayTimePicker: false,
       stayTime: '',
       columns: ['0.5小时', '1小时', '1.5小时', '2小时'],
+      gymInfo: '',
+      maxNum: 0,
+      nowNum: 0
     }
   },
-  props: {
-    gymInfo: {
-      type: String,
-    },
-    maxNum: {
-      type: Number,
-      default: 100
-    },
-    nowNum: {
-      type: Number,
-      default: 50
-    }
-  },
+  // props: {
+  //   gymInfo: {
+  //     type: String,
+  //   },
+  //   maxNum: {
+  //     type: Number,
+  //     default: 100
+  //   },
+  //   nowNum: {
+  //     type: Number,
+  //     default: 50
+  //   }
+  // },
   methods: {
+    getGymInfo() {
+      getGymInfo().then(res => {
+        this.gymInfo = res.data.gymInfo,
+        this.maxNum = res.data.maxNum,
+        this.nowNum = res.data.nowNum
+      })
+    },
+
     onStartTimeConfirm(time) {
       this.startTime = time;
       this.showStartTimePicker = false;

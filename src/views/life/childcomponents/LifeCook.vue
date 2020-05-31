@@ -21,6 +21,7 @@ import { Icon as VanIcon} from 'vant';
 import { Cell as VanCell ,CellGroup as VanCellGroup } from 'vant';
 import { Divider as VanDivider} from 'vant';
 import DishItem from './DishItem'
+import {getDish} from 'network/life'
 export default {
   components: {
     VanIcon,
@@ -37,6 +38,13 @@ export default {
         {img: 'https://img.yzcdn.cn/vant/ipad.jpeg',desc:'这里是描述',dishName:'菜品名',num: 10},
         {img: 'https://img.yzcdn.cn/vant/ipad.jpeg',desc:'这里是描述',dishName:'菜品名',num: 10},
       ]
+    }
+  },
+  methods: {
+    getDishList() {
+      getDish().then(res => {
+        this.dishList = res.data
+      })
     }
   }
 }

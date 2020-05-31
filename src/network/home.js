@@ -7,3 +7,10 @@ export function getCityHotels(params) {
     params: params
   })
 }
+
+export function getImages(params) {
+  return require({
+    url: '',
+    params: params
+  })
+}

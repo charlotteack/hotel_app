@@ -15,12 +15,12 @@
         <img src="~assets/image/tabbar/life.svg" alt="" slot="item-icon">
         <img src="~assets/image/tabbar/life_active.svg" alt="" slot="item-icon-active">
         <div slot="item-text">入住</div>
-      </TabBarItem>
+      <!-- </TabBarItem>
       <TabBarItem path="/cart">
         <img src="~assets/image/tabbar/cart.svg" alt="" slot="item-icon">
         <img src="~assets/image/tabbar/cart_active.svg" alt="" slot="item-icon-active">
         <div slot="item-text">购物车</div>
-      </TabBarItem>
+      </TabBarItem> -->
       <TabBarItem path="/profile">
         <img src="~assets/image/tabbar/user.svg" alt="" slot="item-icon">
         <img src="~assets/image/tabbar/user_active.svg" alt="" slot="item-icon-active">

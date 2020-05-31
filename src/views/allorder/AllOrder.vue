@@ -9,6 +9,7 @@
 <script>
 import AllOrderNavBar from './childcomponents/AllOrderNavBar'
 import OneRoomOrder from './childcomponents/OneRoomOrder'
+import {getAllOrder} from 'network/order'
 export default {
   components: {
     AllOrderNavBar,
@@ -20,6 +21,14 @@ export default {
       orderList: [
         {img: 'https://img.yzcdn.cn/vant/ipad.jpeg', price:100, desc:'这里是描述', roomName:'单人间'}
       ]
+    }
+  },
+  methods: {
+    getOrderList() {
+      //通过邮件拿到
+      getAllOrder({}).then(res => {
+        this.orderList = res.data
+      })
     }
   }
 }

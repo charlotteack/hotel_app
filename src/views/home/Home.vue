@@ -56,7 +56,7 @@
 
   import HotelList from '@/components/content/hotels/HotelList'
   
-  import {getCityHotels} from '@/network/home'
+  import {getCityHotels, getImages} from '@/network/home'
   import {backTopMixin} from "@/common/mixins";
 
   export default {
@@ -77,6 +77,7 @@
     },
     data() {
       return {
+        images: [],
         iconNames: ['new','hot','good-job'],
         iconTexts: ['新店开张','最受欢迎','好评如潮'],
         myCity: '天门市',
@@ -123,6 +124,12 @@
         this.myCity = this.selectedCity[0].name + this.selectedCity[1].name
         this.showCity = false
       },
+
+      getSwiperImage() {
+        getImages().then(res=>{
+          this.images = res.data
+        })
+      }
 
       getHomeCityHotels() {
         let page = this.hotels.page + 1

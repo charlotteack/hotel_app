@@ -19,6 +19,7 @@
   import NavBar from "components/common/navbar/NavBar"
   import UserInfo from './childcomponents/UserInfo'
   import UserService from './childcomponents/UserService'
+  import {getUserInfo} from 'network/profile'
   export default {
     name: "Profile",
     components: {
@@ -35,6 +36,16 @@
         createTime: '2020年5月23日'
       }
 
+    },
+    methods: {
+      getUserInfo() {
+        getUserInfo().then(res => {
+          this.username = res.data.username,
+          this.avatur = res.data.avatur,
+          this.sex = res.data.sex,
+          this.createTime = res.data.createTime
+        })
+      }
     }
   }
 </script>
