@@ -12,7 +12,7 @@
       <h3>{{username}}</h3>
       <img src="@/assets/image/user/man.svg" alt="" v-if="sex==='男'">
       <img src="@/assets/image/user/woman.svg" alt="" v-else>
-      <van-button type="info" id="updateBtn">编辑资料</van-button>
+      <van-button type="info" id="updateBtn" @click="updateProfile">编辑资料</van-button>
       <p>注册时间:{{createTime}}</p>
     </div>
     
@@ -49,6 +49,11 @@
       },
       createTime: {
         type: String,
+      }
+    },
+    methods: {
+      updateProfile() {
+        this.$router.push('/updateprofile')
       }
     }
    

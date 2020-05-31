@@ -3,27 +3,12 @@
     <keep-alive include="Home">
       <router-view/>
     </keep-alive>
-    <main-tab-bar v-if="isShowTab"/>
   </div>
 </template>
 
 <script>
-  import MainTabBar from 'components/content/mainTabBar/MainTabBar'
   export default {
     name: 'App',
-    components: {
-      MainTabBar
-    },
-    data() {
-      return {
-        list: ['/login','/reg','/forget']
-      }
-    },
-    computed: {
-      isShowTab() {
-        return !this.list.includes(this.$route.path)
-      }
-    }
   }
 </script>
 

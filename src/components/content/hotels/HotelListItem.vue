@@ -1,32 +1,36 @@
 <template>
-
-  <van-card
-    price="120.00"
-    desc="描述信息描述信息描述信息描述信息"
-    title="酒店名称"
-    thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-  >
-    <template #tags>
-      <van-tag plain type="danger">标签</van-tag>
-      <van-tag plain type="danger">标签</van-tag>
-    </template>
-    <template #footer>
-      <van-button size="mini">按钮</van-button>
-      <van-button size="mini">按钮</van-button>
-    </template>
-  </van-card>
+  <div @click="itemClick">
+    <goods-card :imgURL='hotelItem.img' :price='hotelItem.price' :desc='hotelItem.desc' :title='hotelItem.hotelName'>
+      <van-tag plain type="danger" slot="myTag">经济实惠</van-tag>
+    </goods-card>
+  </div>
 
 </template>
 
 <script>
-  import { Card as VanCard} from 'vant';
+  import GoodsCard from 'components/common/goodscard/GoodsCard.vue'
+  import { Tag as VanTag } from 'vant'
   export default {
     components: {
-      VanCard
+      GoodsCard,
+      VanTag
     },
     props: {
-      
+      hotelItem: {
+        type: Object,
+        default() {
+          return {}
+        },
+        required: true
+      }
+    },
+    methods: {
+      itemClick() {
+        this.$router.push('/detail')
+        // this.$router.push('/detail/' + this.goodsItem.id)
+      }
     }
+
     
   }
 </script>

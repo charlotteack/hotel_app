@@ -1,6 +1,6 @@
 <template>
   <div class="hotelListItem">
-    <hotel-list-item v-for="value in 10" :key="value"></hotel-list-item>
+    <hotel-list-item v-for="i in hotelList.length" :key="i" :hotelItem='hotelList[i-1]'></hotel-list-item>
   </div>
   
 </template>
@@ -12,7 +12,10 @@
       HotelListItem
     },
     props: {
-
+      hotelList: {
+        type: Array,
+        required: true
+      }
     }
   }
 </script>

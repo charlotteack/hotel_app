@@ -8,17 +8,21 @@
   <user-service>
 
   </user-service>
+
+  <main-tab-bar/>
 </div>
 
 </template>
 
 <script>
+  import MainTabBar from 'components/content/mainTabBar/MainTabBar'
   import NavBar from "components/common/navbar/NavBar"
   import UserInfo from './childcomponents/UserInfo'
   import UserService from './childcomponents/UserService'
   export default {
     name: "Profile",
     components: {
+      MainTabBar,
       NavBar,
       UserInfo,
       UserService
